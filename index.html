@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mum Water</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="slide_1">
+      <img src="images/bg.jpg" alt="" class="bg absolute">
+      <img src="images/scorebg.png" alt="" class="scorebg absolute">
+      <img src="images/text1.png" alt="" class="text1 absolute">
+      <img src="images/bottle.png" alt="" class="bottle absolute">
+      <img src="images/splash.png" alt="" class="splash absolute">
+
+      <span class="team1Name" id="countryone">Australia</span>
+      <span class="team1Score" id="teamone">192/2</span>
+
+      <span class="team2Name" id="countrytwo">Bangladesh</span>
+      <span class="team2Score" id="teamtwo">193/6</span>
+    </div>
+
+
+  </div>
+  </div>
+  <script>
+    
+    var countryone = document.getElementById('countryone')
+var countrytwo = document.getElementById('countrytwo')
+
+var teamone = document.getElementById('teamone')
+var teamtwo = document.getElementById('teamtwo')
+
+getLiveScore();
+setInterval(function () { getLiveScore(); }, 50000);
+
+//var data;
+
+function getLiveScore() {
+
+  fetch('//ms.purplepatch.online/cricket/api/t20/data.json',)
+    .then((response) => response.json())
+    .then((data) => {
+
+      if (data.teamone == false) {
+        teamone.innerText = ''
+      } else {
+        teamone.innerText = data.teamone.split('-')[1];
+      }
+
+      if (data.teamtwo == false) {
+        teamtwo.innerText = ''
+      } else {
+        teamtwo.innerText = data.teamtwo.split('-')[1];
+      }
+
+      countryone.innerText = data.countryone;
+      countrytwo.innerText = data.countrytwo;
+
+    })
+
+}
+  </script>
+</body>
+
+</html>
